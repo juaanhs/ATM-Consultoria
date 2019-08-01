@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     public static final String ATMCONSULTORIA_EMAIL = "atmconsultoria@gmail.com";
     public static final String ASSUNTO_EMAIL = "Contato pelo App ATM Consultoria";
     public static final String MENSAGEM_EMAIL = "Mensagem automática";
-    public static final String KEY_EMAIL = "menssage/rfc822";
+    public static final String KEY_EMAIL = "message/rfc822";
     public static final String TITULO_ESCOLHA_O_APP = "Escolha o app de email:";
     private PrincipalFragment principalFragment;
     private ClientesFragment clientesFragment;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void enviarEmail() {
-        Intent email = new Intent(Intent.ACTION_SEND);
+        Intent email = new Intent(Intent.ACTION_SENDTO);
         email.putExtra(Intent.EXTRA_EMAIL, ATMCONSULTORIA_EMAIL);
         email.putExtra(Intent.EXTRA_SUBJECT, ASSUNTO_EMAIL);
         email.putExtra(Intent.EXTRA_TEXT, MENSAGEM_EMAIL);
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();

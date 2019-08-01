@@ -21,7 +21,7 @@ public class SobreActivity extends AppCompatActivity {
     public static final String ATM_TWITTER = "google";
     public static final String TITULO_TWITTER = "Siga no Twitter";
     public static final String TITULO_YOUTUBE = "Assista no Youtube";
-    public static final String ATM_YOUTUBE = "google";
+    public static final String ATM_YOUTUBE = "UCdPQtdWIsg7_pi4mrRu46vA";
     public static final String ATM_APP = "com.google.android.apps.plus";
     public static final String TITULO_APP = "Nos avalie na PlayStore";
     public static final String ATM_GITHUB = "juaanhs";
