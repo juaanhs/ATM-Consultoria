@@ -1,8 +1,10 @@
-package br.com.juaanhs.atmconsultoria;
+package br.com.juaanhs.atmconsultoria.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,8 +16,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import br.com.juaanhs.atmconsultoria.R;
+import br.com.juaanhs.atmconsultoria.ui.fragment.ClientesFragment;
+import br.com.juaanhs.atmconsultoria.ui.fragment.PrincipalFragment;
+import br.com.juaanhs.atmconsultoria.ui.fragment.ServicosFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private PrincipalFragment principalFragment;
+    private ClientesFragment clientesFragment;
+    private ServicosFragment servicosFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +34,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        instanciaFragments();
+
+        //carrega tela principal
+        criaFragment(principalFragment);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +55,12 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void instanciaFragments() {
+        principalFragment = new PrincipalFragment();
+        clientesFragment = new ClientesFragment();
+        servicosFragment = new ServicosFragment();
     }
 
     @Override
@@ -78,22 +101,32 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_principal) {
 
-        } else if (id == R.id.nav_slideshow) {
+            criaFragment(principalFragment);
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_servicos) {
 
-        } else if (id == R.id.nav_share) {
+            criaFragment(servicosFragment);
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_clientes) {
+
+            criaFragment(clientesFragment);
+
+        } else if (id == R.id.nav_contato) {
+
+        } else if (id == R.id.nav_sobre) {
 
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void criaFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_container, fragment);
+        fragmentTransaction.commit();
     }
 }
