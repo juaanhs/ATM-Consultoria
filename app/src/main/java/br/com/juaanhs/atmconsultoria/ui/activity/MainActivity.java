@@ -1,5 +1,6 @@
 package br.com.juaanhs.atmconsultoria.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,8 +45,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                enviarEmail();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -55,6 +55,17 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void enviarEmail() {
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{"atmconsultoria@gmail.com", "ruaanhs@gmail.com"});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Contato pelo App ATM Consultoria");
+        email.putExtra(Intent.EXTRA_TEXT, "Mensagem automática");
+
+        //configurar apps para e-mail
+        email.setType("menssage/rfc822"); // configura o tipo e app sugestivo para email
+        startActivity( Intent.createChooser(email, "Escolha o app de email:")); // definindo Título da escolha de app
     }
 
     private void instanciaFragments() {
@@ -114,6 +125,8 @@ public class MainActivity extends AppCompatActivity
             criaFragment(clientesFragment);
 
         } else if (id == R.id.nav_contato) {
+
+            enviarEmail();
 
         } else if (id == R.id.nav_sobre) {
 
